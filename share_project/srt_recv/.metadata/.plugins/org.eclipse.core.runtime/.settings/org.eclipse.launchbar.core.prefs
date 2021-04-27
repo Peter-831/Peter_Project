@@ -1,0 +1,11 @@
+LaunchTargetManager/configs/srt_recv=org.eclipse.launchbar.core.launchTargetType.local\:Local
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86_64
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/name=Local
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=linux
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,\u672C\u5730/arch=x86_64
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,\u672C\u5730/name=\u672C\u5730
+LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,\u672C\u5730/os=linux
+configDescList=org.eclipse.launchbar.core.descriptorType.default\:srt_recv
+eclipse.preferences.version=1
+org.eclipse.launchbar.core.descriptorType.default\:srt_recv/activeLaunchMode=run
+org.eclipse.launchbar.core.descriptorType.default\:srt_recv/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local

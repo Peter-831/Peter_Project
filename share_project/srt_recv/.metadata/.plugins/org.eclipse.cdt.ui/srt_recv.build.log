@@ -1,0 +1,6 @@
+16:53:10 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+
+16:53:11 Build Finished. 0 errors, 0 warnings. (took 357ms)
+

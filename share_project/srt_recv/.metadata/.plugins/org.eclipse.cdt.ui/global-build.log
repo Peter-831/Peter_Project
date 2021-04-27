@@ -1,0 +1,1850 @@
+20:52:17 **** Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../RingBuffer.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RingBuffer.d" -MT"RingBuffer.o" -o "RingBuffer.o" "../RingBuffer.c"
+../RingBuffer.c: In function ‘ring_buffer_init’:
+../RingBuffer.c:55:6: warning: implicit declaration of function ‘cond_ini’ [-Wimplicit-function-declaration]
+  if (cond_ini(&ring_buf_full, NULL) < 0) {
+      ^
+../RingBuffer.c:65:6: warning: implicit declaration of function ‘mutex_ini’ [-Wimplicit-function-declaration]
+  if (mutex_ini(&mutex, NULL) < 0) {
+      ^
+../RingBuffer.c: In function ‘ring_buf_left_fm’:
+../RingBuffer.c:77:2: warning: implicit declaration of function ‘lock’ [-Wimplicit-function-declaration]
+  lock(&mutex);
+  ^
+../RingBuffer.c:79:2: warning: implicit declaration of function ‘unlock’ [-Wimplicit-function-declaration]
+  unlock(&mutex);
+  ^
+../RingBuffer.c: In function ‘write_nalu_to_ring_buffer’:
+../RingBuffer.c:108:3: warning: implicit declaration of function ‘cond_wait’ [-Wimplicit-function-declaration]
+   cond_wait(&ring_buf_full, &mutex);
+   ^
+../RingBuffer.c:201:3: warning: implicit declaration of function ‘cond_signal’ [-Wimplicit-function-declaration]
+   cond_signal(&ring_buf_empty);
+   ^
+../RingBuffer.c:95:33: warning: unused variable ‘overflow_count’ [-Wunused-variable]
+  static int write_len_send = 0, overflow_count = 0;
+                                 ^
+../RingBuffer.c: In function ‘read_nalu_from_ring_buffer’:
+../RingBuffer.c:215:32: warning: unused variable ‘underflow_count’ [-Wunused-variable]
+  static int copy_len_send = 0, underflow_count = 0;
+                                ^
+../RingBuffer.c: At top level:
+../RingBuffer.c:300:6: warning: conflicting types for ‘lock’
+ void lock(pthread_mutex_t *mutex)
+      ^
+../RingBuffer.c:77:2: note: previous implicit declaration of ‘lock’ was here
+  lock(&mutex);
+  ^
+../RingBuffer.c:305:6: warning: conflicting types for ‘unlock’
+ void unlock(pthread_mutex_t *mutex)
+      ^
+../RingBuffer.c:79:2: note: previous implicit declaration of ‘unlock’ was here
+  unlock(&mutex);
+  ^
+../RingBuffer.c:328:6: warning: conflicting types for ‘cond_signal’
+ void cond_signal(pthread_cond_t *cond)
+      ^
+../RingBuffer.c:201:3: note: previous implicit declaration of ‘cond_signal’ was here
+   cond_signal(&ring_buf_empty);
+   ^
+../RingBuffer.c:333:6: warning: conflicting types for ‘cond_wait’
+ void cond_wait(pthread_cond_t *cond, pthread_mutex_t *mutex)
+      ^
+../RingBuffer.c:108:3: note: previous implicit declaration of ‘cond_wait’ was here
+   cond_wait(&ring_buf_full, &mutex);
+   ^
+Finished building: ../RingBuffer.c
+ 
+Building file: ../RtpSend.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RtpSend.d" -MT"RtpSend.o" -o "RtpSend.o" "../RtpSend.c"
+../RtpSend.c: In function ‘Rtp_Send’:
+../RtpSend.c:60:14: warning: implicit declaration of function ‘read_nalu_from_ring_buffer’ [-Wimplicit-function-declaration]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+              ^
+../RtpSend.c:68:2: warning: implicit declaration of function ‘close’ [-Wimplicit-function-declaration]
+  close(fd);
+  ^
+Finished building: ../RtpSend.c
+ 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:215:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg + sizeof(UDP_HEADER), len - sizeof(UDP_HEADER), ind);
+         ^
+../SrtRecv.c:195:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[1500] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building file: ../main.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.c"
+../main.c: In function ‘main’:
+../main.c:13:5: warning: implicit declaration of function ‘ring_buffer_init’ [-Wimplicit-function-declaration]
+  if(ring_buffer_init() != 0){
+     ^
+Finished building: ../main.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./RingBuffer.o ./RtpSend.o ./SrtRecv.o ./main.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+21:01:26 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../RingBuffer.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RingBuffer.d" -MT"RingBuffer.o" -o "RingBuffer.o" "../RingBuffer.c"
+../RingBuffer.c: In function ‘ring_buffer_init’:
+../RingBuffer.c:55:6: warning: implicit declaration of function ‘cond_ini’ [-Wimplicit-function-declaration]
+  if (cond_ini(&ring_buf_full, NULL) < 0) {
+      ^
+../RingBuffer.c:65:6: warning: implicit declaration of function ‘mutex_ini’ [-Wimplicit-function-declaration]
+  if (mutex_ini(&mutex, NULL) < 0) {
+      ^
+../RingBuffer.c: In function ‘ring_buf_left_fm’:
+../RingBuffer.c:77:2: warning: implicit declaration of function ‘lock’ [-Wimplicit-function-declaration]
+  lock(&mutex);
+  ^
+../RingBuffer.c:79:2: warning: implicit declaration of function ‘unlock’ [-Wimplicit-function-declaration]
+  unlock(&mutex);
+  ^
+../RingBuffer.c: In function ‘write_nalu_to_ring_buffer’:
+../RingBuffer.c:108:3: warning: implicit declaration of function ‘cond_wait’ [-Wimplicit-function-declaration]
+   cond_wait(&ring_buf_full, &mutex);
+   ^
+../RingBuffer.c:118:1: warning: multi-line comment [-Wcomment]
+ // printf("write fm:%d left_length:%d header len:%d fm len:%d\n", frame_num, left_length, \
+ ^
+../RingBuffer.c:201:3: warning: implicit declaration of function ‘cond_signal’ [-Wimplicit-function-declaration]
+   cond_signal(&ring_buf_empty);
+   ^
+../RingBuffer.c:95:33: warning: unused variable ‘overflow_count’ [-Wunused-variable]
+  static int write_len_send = 0, overflow_count = 0;
+                                 ^
+../RingBuffer.c: In function ‘read_nalu_from_ring_buffer’:
+../RingBuffer.c:240:1: warning: multi-line comment [-Wcomment]
+ // printf("read fm:%d cp len:%d left len:%d fm len:%d\n", \
+ ^
+../RingBuffer.c:215:32: warning: unused variable ‘underflow_count’ [-Wunused-variable]
+  static int copy_len_send = 0, underflow_count = 0;
+                                ^
+../RingBuffer.c: At top level:
+../RingBuffer.c:300:6: warning: conflicting types for ‘lock’
+ void lock(pthread_mutex_t *mutex)
+      ^
+../RingBuffer.c:77:2: note: previous implicit declaration of ‘lock’ was here
+  lock(&mutex);
+  ^
+../RingBuffer.c:305:6: warning: conflicting types for ‘unlock’
+ void unlock(pthread_mutex_t *mutex)
+      ^
+../RingBuffer.c:79:2: note: previous implicit declaration of ‘unlock’ was here
+  unlock(&mutex);
+  ^
+../RingBuffer.c:328:6: warning: conflicting types for ‘cond_signal’
+ void cond_signal(pthread_cond_t *cond)
+      ^
+../RingBuffer.c:201:3: note: previous implicit declaration of ‘cond_signal’ was here
+   cond_signal(&ring_buf_empty);
+   ^
+../RingBuffer.c:333:6: warning: conflicting types for ‘cond_wait’
+ void cond_wait(pthread_cond_t *cond, pthread_mutex_t *mutex)
+      ^
+../RingBuffer.c:108:3: note: previous implicit declaration of ‘cond_wait’ was here
+   cond_wait(&ring_buf_full, &mutex);
+   ^
+Finished building: ../RingBuffer.c
+ 
+Building file: ../RtpSend.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RtpSend.d" -MT"RtpSend.o" -o "RtpSend.o" "../RtpSend.c"
+../RtpSend.c: In function ‘Rtp_Send’:
+../RtpSend.c:60:14: warning: implicit declaration of function ‘read_nalu_from_ring_buffer’ [-Wimplicit-function-declaration]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+              ^
+../RtpSend.c:68:2: warning: implicit declaration of function ‘close’ [-Wimplicit-function-declaration]
+  close(fd);
+  ^
+Finished building: ../RtpSend.c
+ 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:215:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg + sizeof(UDP_HEADER), len - sizeof(UDP_HEADER), ind);
+         ^
+../SrtRecv.c:195:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[1500] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building file: ../main.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.c"
+../main.c: In function ‘main’:
+../main.c:13:5: warning: implicit declaration of function ‘ring_buffer_init’ [-Wimplicit-function-declaration]
+  if(ring_buffer_init() != 0){
+     ^
+Finished building: ../main.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./RingBuffer.o ./RtpSend.o ./SrtRecv.o ./main.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+21:03:36 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../main.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.c"
+../main.c: In function ‘main’:
+../main.c:13:5: warning: implicit declaration of function ‘ring_buffer_init’ [-Wimplicit-function-declaration]
+  if(ring_buffer_init() != 0){
+     ^
+Finished building: ../main.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./RingBuffer.o ./RtpSend.o ./SrtRecv.o ./main.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+21:29:41 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../main.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.c"
+Finished building: ../main.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./RingBuffer.o ./RtpSend.o ./SrtRecv.o ./main.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+21:30:19 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../main.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.c"
+Finished building: ../main.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./RingBuffer.o ./RtpSend.o ./SrtRecv.o ./main.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+21:51:35 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../RtpSend.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RtpSend.d" -MT"RtpSend.o" -o "RtpSend.o" "../RtpSend.c"
+../RtpSend.c: In function ‘Rtp_Send’:
+../RtpSend.c:59:14: warning: implicit declaration of function ‘read_nalu_from_ring_buffer’ [-Wimplicit-function-declaration]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+              ^
+../RtpSend.c:67:2: warning: implicit declaration of function ‘close’ [-Wimplicit-function-declaration]
+  close(fd);
+  ^
+Finished building: ../RtpSend.c
+ 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:211:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg + sizeof(UDP_HEADER), len - sizeof(UDP_HEADER), ind);
+         ^
+../SrtRecv.c:191:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[1500] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building file: ../main.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.c"
+Finished building: ../main.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./RingBuffer.o ./RtpSend.o ./SrtRecv.o ./main.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+21:52:22 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+../RtpSend.c: In function ‘Send_Init’:
+Building file: ../RtpSend.c
+../RtpSend.c:15:20: error: ‘REMOTE_IP’ undeclared (first use in this function)
+  char *remote_IP = REMOTE_IP;
+                    ^
+../RtpSend.c:15:20: note: each undeclared identifier is reported only once for each function it appears in
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RtpSend.d" -MT"RtpSend.o" -o "RtpSend.o" "../RtpSend.c"
+subdir.mk:27: recipe for target 'RtpSend.o' failed
+../RtpSend.c: In function ‘Rtp_Send’:
+../RtpSend.c:55:19: error: ‘MAXBUF’ undeclared (first use in this function)
+  char Packet_Buff[MAXBUF + 1] = {0};
+                   ^
+../RtpSend.c:59:14: warning: implicit declaration of function ‘read_nalu_from_ring_buffer’ [-Wimplicit-function-declaration]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+              ^
+../RtpSend.c:67:2: warning: implicit declaration of function ‘close’ [-Wimplicit-function-declaration]
+  close(fd);
+  ^
+../RtpSend.c:55:7: warning: unused variable ‘Packet_Buff’ [-Wunused-variable]
+  char Packet_Buff[MAXBUF + 1] = {0};
+       ^
+make: *** [RtpSend.o] Error 1
+21:52:43 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../RtpSend.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RtpSend.d" -MT"RtpSend.o" -o "RtpSend.o" "../RtpSend.c"
+../RtpSend.c: In function ‘Rtp_Send’:
+../RtpSend.c:59:14: warning: implicit declaration of function ‘read_nalu_from_ring_buffer’ [-Wimplicit-function-declaration]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+              ^
+../RtpSend.c:67:2: warning: implicit declaration of function ‘close’ [-Wimplicit-function-declaration]
+  close(fd);
+  ^
+Finished building: ../RtpSend.c
+ 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:211:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg + sizeof(UDP_HEADER), len - sizeof(UDP_HEADER), ind);
+         ^
+../SrtRecv.c:191:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[1500] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building file: ../main.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.c"
+Finished building: ../main.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./RingBuffer.o ./RtpSend.o ./SrtRecv.o ./main.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+21:53:14 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../RtpSend.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RtpSend.d" -MT"RtpSend.o" -o "RtpSend.o" "../RtpSend.c"
+In file included from ../RtpSend.c:8:0:
+../RtpSend.h:19:22: fatal error: RingBuff.h: 没有那个文件或目录
+compilation terminated.
+make: *** [RtpSend.o] Error 1
+subdir.mk:27: recipe for target 'RtpSend.o' failed
+21:53:21 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../RtpSend.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RtpSend.d" -MT"RtpSend.o" -o "RtpSend.o" "../RtpSend.c"
+../RtpSend.c: In function ‘Rtp_Send’:
+../RtpSend.c:59:41: warning: pointer targets in passing argument 1 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                         ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^
+../RtpSend.c:59:54: warning: pointer targets in passing argument 2 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                                      ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned int *’ but argument is of type ‘int *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^
+Finished building: ../RtpSend.c
+ 
+Building file: ../main.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.c"
+Finished building: ../main.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./RingBuffer.o ./RtpSend.o ./SrtRecv.o ./main.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+21:54:01 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../RtpSend.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RtpSend.d" -MT"RtpSend.o" -o "RtpSend.o" "../RtpSend.c"
+../RtpSend.c: In function ‘Rtp_Send’:
+../RtpSend.c:59:41: warning: pointer targets in passing argument 1 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                         ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^
+../RtpSend.c:59:54: warning: pointer targets in passing argument 2 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                                      ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned int *’ but argument is of type ‘int *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^
+Finished building: ../RtpSend.c
+ 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Init’:
+../SrtRecv.c:129:25: error: ‘SRT_LOCAL_IP’ undeclared (first use in this function)
+  if (inet_pton(AF_INET, SRT_LOCAL_IP, &sa.sin_addr) != 1)
+                         ^
+../SrtRecv.c:129:25: note: each undeclared identifier is reported only once for each function it appears in
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:211:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg + sizeof(UDP_HEADER), len - sizeof(UDP_HEADER), ind);
+         ^
+../SrtRecv.c:191:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[1500] = {0};
+                    ^
+subdir.mk:27: recipe for target 'SrtRecv.o' failed
+make: *** [SrtRecv.o] Error 1
+21:55:39 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Init’:
+../SrtRecv.c:127:25: error: ‘SRT_LOCAL_IP’ undeclared (first use in this function)
+  if (inet_pton(AF_INET, SRT_LOCAL_IP, &sa.sin_addr) != 1)
+                         ^
+../SrtRecv.c:127:25: note: each undeclared identifier is reported only once for each function it appears in
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:204:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg + sizeof(UDP_HEADER), len - sizeof(UDP_HEADER), ind);
+         ^
+../SrtRecv.c:184:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[1500] = {0};
+                    ^
+make: *** [SrtRecv.o] Error 1
+subdir.mk:27: recipe for target 'SrtRecv.o' failed
+21:55:47 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+../RtpSend.c: In function ‘Rtp_Send’:
+Building file: ../RtpSend.c
+../RtpSend.c:59:41: warning: pointer targets in passing argument 1 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RtpSend.d" -MT"RtpSend.o" -o "RtpSend.o" "../RtpSend.c"
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                         ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^
+../RtpSend.c:59:54: warning: pointer targets in passing argument 2 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                                      ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned int *’ but argument is of type ‘int *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^
+Finished building: ../RtpSend.c
+ 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:204:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg + sizeof(UDP_HEADER), len - sizeof(UDP_HEADER), ind);
+         ^
+../SrtRecv.c:184:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[1500] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building file: ../main.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.c"
+Finished building: ../main.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./RingBuffer.o ./RtpSend.o ./SrtRecv.o ./main.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+21:55:57 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../RtpSend.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RtpSend.d" -MT"RtpSend.o" -o "RtpSend.o" "../RtpSend.c"
+../RtpSend.c: In function ‘Rtp_Send’:
+../RtpSend.c:59:41: warning: pointer targets in passing argument 1 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                         ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^
+../RtpSend.c:59:54: warning: pointer targets in passing argument 2 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                                      ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned int *’ but argument is of type ‘int *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^
+Finished building: ../RtpSend.c
+ 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:204:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg + sizeof(UDP_HEADER), len - sizeof(UDP_HEADER), ind);
+         ^
+../SrtRecv.c:184:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[1500] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building file: ../main.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.c"
+Finished building: ../main.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./RingBuffer.o ./RtpSend.o ./SrtRecv.o ./main.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+21:56:42 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+21:57:29 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:205:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg + sizeof(UDP_HEADER), len - sizeof(UDP_HEADER), ind);
+         ^
+../SrtRecv.c:185:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[1500] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./RingBuffer.o ./RtpSend.o ./SrtRecv.o ./main.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+21:57:33 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+21:59:31 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+22:01:01 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+22:03:49 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+22:13:33 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+22:36:08 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../Main.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Main.d" -MT"Main.o" -o "Main.o" "../Main.c"
+Finished building: ../Main.c
+ 
+Building file: ../RtpSend.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RtpSend.d" -MT"RtpSend.o" -o "RtpSend.o" "../RtpSend.c"
+../RtpSend.c: In function ‘Rtp_Send’:
+../RtpSend.c:59:41: warning: pointer targets in passing argument 1 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                         ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^
+../RtpSend.c:59:54: warning: pointer targets in passing argument 2 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                                      ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+subdir.mk:27: recipe for target 'RtpSend.o' failed
+../RingBuffer.h:18:5: note: expected ‘unsigned int *’ but argument is of type ‘int *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^
+../RtpSend.c:60:3: error: unknown type name ‘UDP_HEADER’
+   UDP_HEADER* header = (UDP_HEADER *)Packet_Buff;
+   ^
+../RtpSend.c:60:25: error: ‘UDP_HEADER’ undeclared (first use in this function)
+   UDP_HEADER* header = (UDP_HEADER *)Packet_Buff;
+                         ^
+../RtpSend.c:60:25: note: each undeclared identifier is reported only once for each function it appears in
+../RtpSend.c:60:37: error: expected expression before ‘)’ token
+   UDP_HEADER* header = (UDP_HEADER *)Packet_Buff;
+                                     ^
+../RtpSend.c:61:33: error: request for member ‘dest’ in something not a structure or union
+   stRemoteAddr.sin_port = header->dest;
+                                 ^
+make: *** [RtpSend.o] Error 1
+22:37:57 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../RtpSend.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RtpSend.d" -MT"RtpSend.o" -o "RtpSend.o" "../RtpSend.c"
+../RtpSend.c: In function ‘Rtp_Send’:
+../RtpSend.c:60:41: warning: pointer targets in passing argument 1 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                         ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^
+../RtpSend.c:60:54: warning: pointer targets in passing argument 2 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                                      ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned int *’ but argument is of type ‘int *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^
+Finished building: ../RtpSend.c
+ 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:206:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^
+../SrtRecv.c:185:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[1500] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+22:38:06 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+22:38:26 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+22:42:52 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:207:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^
+../SrtRecv.c:186:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[1500] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+22:43:42 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:207:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^
+../SrtRecv.c:186:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+09:44:20 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../RtpSend.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RtpSend.d" -MT"RtpSend.o" -o "RtpSend.o" "../RtpSend.c"
+../RtpSend.c: In function ‘Rtp_Send’:
+../RtpSend.c:60:41: warning: pointer targets in passing argument 1 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                         ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^
+../RtpSend.c:60:54: warning: pointer targets in passing argument 2 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                                      ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned int *’ but argument is of type ‘int *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^
+Finished building: ../RtpSend.c
+ 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:205:1: warning: multi-line comment [-Wcomment]
+ //        printf("udp info:%u %u %u %u\n", ntohs(udp_header->source),\
+ ^
+../SrtRecv.c:207:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^
+../SrtRecv.c:186:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+10:24:46 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+10:27:45 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+10:30:38 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+10:59:47 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../Main.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Main.d" -MT"Main.o" -o "Main.o" "../Main.c"
+Finished building: ../Main.c
+ 
+Building file: ../RtpSend.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RtpSend.d" -MT"RtpSend.o" -o "RtpSend.o" "../RtpSend.c"
+../RtpSend.c: In function ‘Rtp_Send’:
+../RtpSend.c:60:41: warning: pointer targets in passing argument 1 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                         ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^
+../RtpSend.c:60:54: warning: pointer targets in passing argument 2 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                                      ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned int *’ but argument is of type ‘int *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^
+Finished building: ../RtpSend.c
+ 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:205:1: warning: multi-line comment [-Wcomment]
+ //        printf("udp info:%u %u %u %u\n", ntohs(udp_header->source),\
+ ^
+../SrtRecv.c:207:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^
+../SrtRecv.c:186:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+11:05:53 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+11:09:01 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+11:10:14 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+11:11:59 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+11:14:49 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+16:05:19 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../Main.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Main.d" -MT"Main.o" -o "Main.o" "../Main.c"
+Finished building: ../Main.c
+ 
+Building file: ../RtpSend.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RtpSend.d" -MT"RtpSend.o" -o "RtpSend.o" "../RtpSend.c"
+../RtpSend.c: In function ‘Rtp_Send’:
+../RtpSend.c:60:41: warning: pointer targets in passing argument 1 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                         ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^
+../RtpSend.c:60:54: warning: pointer targets in passing argument 2 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                                      ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned int *’ but argument is of type ‘int *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^
+Finished building: ../RtpSend.c
+ 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:205:1: warning: multi-line comment [-Wcomment]
+ //        printf("udp info:%u %u %u %u\n", ntohs(udp_header->source),\
+ ^
+../SrtRecv.c:207:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^
+../SrtRecv.c:186:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+16:10:12 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+16:21:01 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+16:22:17 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+16:23:28 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+16:24:02 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+16:25:45 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+16:27:32 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+16:33:24 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+16:36:20 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+16:37:51 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:00:52 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:02:17 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:04:16 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:07:52 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:15:08 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:17:17 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:19:14 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Init’:
+../SrtRecv.c:113:6: warning: unused variable ‘yes’ [-Wunused-variable]
+  int yes = 1;
+      ^
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:205:1: warning: multi-line comment [-Wcomment]
+ //        printf("udp info:%u %u %u %u\n", ntohs(udp_header->source),\
+ ^
+../SrtRecv.c:207:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^
+../SrtRecv.c:186:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+17:19:48 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:22:03 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:23:48 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:25:42 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:26:30 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:27:48 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:205:1: warning: multi-line comment [-Wcomment]
+ //        printf("udp info:%u %u %u %u\n", ntohs(udp_header->source),\
+ ^
+../SrtRecv.c:207:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^
+../SrtRecv.c:186:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+17:27:54 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:31:26 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:34:16 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:36:39 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:36:42 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:40:22 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:41:10 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:50:19 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:53:11 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:206:1: warning: multi-line comment [-Wcomment]
+ //        printf("udp info:%u %u %u %u\n", ntohs(udp_header->source),\
+ ^
+../SrtRecv.c:208:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^
+../SrtRecv.c:187:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+17:53:14 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+17:54:56 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:206:1: warning: multi-line comment [-Wcomment]
+ //        printf("udp info:%u %u %u %u\n", ntohs(udp_header->source),\
+ ^
+../SrtRecv.c:208:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^
+../SrtRecv.c:187:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+17:55:07 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+18:00:00 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+18:00:55 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+18:06:48 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:208:1: warning: multi-line comment [-Wcomment]
+ //        printf("udp info:%u %u %u %u\n", ntohs(udp_header->source),\
+ ^
+../SrtRecv.c:210:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^
+../SrtRecv.c:189:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+18:06:55 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+21:14:29 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+21:21:17 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Init’:
+../SrtRecv.c:132:54: warning: passing argument 1 of ‘strlen’ makes pointer from integer without a cast [-Wint-conversion]
+  srt_setsockflag(ss, SRTO_PACKETFILTER, &fec, strlen(yes));
+                                                      ^
+In file included from /usr/local/include/srt/platform_sys.h:109:0,
+                 from /usr/local/include/srt/srt.h:21,
+                 from ../SrtRecv.h:11,
+                 from ../SrtRecv.c:9:
+/usr/include/string.h:394:15: note: expected ‘const char *’ but argument is of type ‘int’
+ extern size_t strlen (const char *__s)
+               ^
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:209:1: warning: multi-line comment [-Wcomment]
+ //        printf("udp info:%u %u %u %u\n", ntohs(udp_header->source),\
+ ^
+../SrtRecv.c:211:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^
+../SrtRecv.c:190:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+21:21:27 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:209:1: warning: multi-line comment [-Wcomment]
+ //        printf("udp info:%u %u %u %u\n", ntohs(udp_header->source),\
+ ^
+../SrtRecv.c:211:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^
+../SrtRecv.c:190:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+21:21:30 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+21:24:29 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:209:1: warning: multi-line comment [-Wcomment]
+ //        printf("udp info:%u %u %u %u\n", ntohs(udp_header->source),\
+ ^
+../SrtRecv.c:211:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^
+../SrtRecv.c:190:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+21:24:34 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+21:24:50 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+21:29:56 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+21:32:08 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:209:1: warning: multi-line comment [-Wcomment]
+ //        printf("udp info:%u %u %u %u\n", ntohs(udp_header->source),\
+ ^
+../SrtRecv.c:211:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^
+../SrtRecv.c:190:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+21:32:14 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+21:38:18 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:209:1: warning: multi-line comment [-Wcomment]
+ //        printf("udp info:%u %u %u %u\n", ntohs(udp_header->source),\
+ ^
+../SrtRecv.c:211:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^
+../SrtRecv.c:190:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+21:42:05 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+21:44:54 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:209:1: warning: multi-line comment [-Wcomment]
+ //        printf("udp info:%u %u %u %u\n", ntohs(udp_header->source),\
+ ^
+../SrtRecv.c:211:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^
+../SrtRecv.c:190:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+21:45:44 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: Nothing to be done for 'all'.
+21:47:18 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+Building file: ../SrtRecv.c
+Invoking: GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:209:1: warning: multi-line comment [-Wcomment]
+ //        printf("udp info:%u %u %u %u\n", ntohs(udp_header->source),\
+ ^
+../SrtRecv.c:211:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^
+../SrtRecv.c:190:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^
+Finished building: ../SrtRecv.c
+ 
+Building target: srt_recv
+Invoking: GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+Finished building target: srt_recv
+ 
+10:08:41 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+正在构建文件： ../Main.c
+正在调用： GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Main.d" -MT"Main.o" -o "Main.o" "../Main.c"
+In file included from ../Main.c:7:0:
+../SrtRecv.h:11:10: fatal error: srt/srt.h: 没有那个文件或目录
+ #include <srt/srt.h>
+          ^~~~~~~~~~~
+compilation terminated.
+subdir.mk:27: recipe for target 'Main.o' failed
+make: *** [Main.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+10:17:22 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+正在构建文件： ../Main.c
+正在调用： GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Main.d" -MT"Main.o" -o "Main.o" "../Main.c"
+In file included from ../Main.c:7:0:
+../SrtRecv.h:11:10: fatal error: srt/srt.h: 没有那个文件或目录
+ #include <srt/srt.h>
+          ^~~~~~~~~~~
+compilation terminated.
+subdir.mk:27: recipe for target 'Main.o' failed
+make: *** [Main.o] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+10:17:45 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+正在构建文件： ../Main.c
+正在调用： GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/home/peter/transplant_srt/temp/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Main.d" -MT"Main.o" -o "Main.o" "../Main.c"
+已结束构建： ../Main.c
+ 
+正在构建文件： ../RingBuffer.c
+正在调用： GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/home/peter/transplant_srt/temp/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RingBuffer.d" -MT"RingBuffer.o" -o "RingBuffer.o" "../RingBuffer.c"
+../RingBuffer.c: In function ‘ring_buffer_init’:
+../RingBuffer.c:55:6: warning: implicit declaration of function ‘cond_ini’ [-Wimplicit-function-declaration]
+  if (cond_ini(&ring_buf_full, NULL) < 0) {
+      ^~~~~~~~
+../RingBuffer.c:65:6: warning: implicit declaration of function ‘mutex_ini’ [-Wimplicit-function-declaration]
+  if (mutex_ini(&mutex, NULL) < 0) {
+      ^~~~~~~~~
+../RingBuffer.c: In function ‘ring_buf_left_fm’:
+../RingBuffer.c:77:2: warning: implicit declaration of function ‘lock’; did you mean ‘clock’? [-Wimplicit-function-declaration]
+  lock(&mutex);
+  ^~~~
+  clock
+../RingBuffer.c:79:2: warning: implicit declaration of function ‘unlock’; did you mean ‘clock’? [-Wimplicit-function-declaration]
+  unlock(&mutex);
+  ^~~~~~
+  clock
+../RingBuffer.c: In function ‘write_nalu_to_ring_buffer’:
+../RingBuffer.c:108:3: warning: implicit declaration of function ‘cond_wait’; did you mean ‘on_exit’? [-Wimplicit-function-declaration]
+   cond_wait(&ring_buf_full, &mutex);
+   ^~~~~~~~~
+   on_exit
+../RingBuffer.c:118:1: warning: multi-line comment [-Wcomment]
+ // printf("write fm:%d left_length:%d header len:%d fm len:%d\n", frame_num, left_length, \
+ ^
+../RingBuffer.c:201:3: warning: implicit declaration of function ‘cond_signal’; did you mean ‘strsignal’? [-Wimplicit-function-declaration]
+   cond_signal(&ring_buf_empty);
+   ^~~~~~~~~~~
+   strsignal
+../RingBuffer.c:95:33: warning: unused variable ‘overflow_count’ [-Wunused-variable]
+  static int write_len_send = 0, overflow_count = 0;
+                                 ^~~~~~~~~~~~~~
+../RingBuffer.c: In function ‘read_nalu_from_ring_buffer’:
+../RingBuffer.c:240:1: warning: multi-line comment [-Wcomment]
+ // printf("read fm:%d cp len:%d left len:%d fm len:%d\n", \
+ ^
+../RingBuffer.c:215:32: warning: unused variable ‘underflow_count’ [-Wunused-variable]
+  static int copy_len_send = 0, underflow_count = 0;
+                                ^~~~~~~~~~~~~~~
+../RingBuffer.c: At top level:
+../RingBuffer.c:300:6: warning: conflicting types for ‘lock’
+ void lock(pthread_mutex_t *mutex)
+      ^~~~
+../RingBuffer.c:77:2: note: previous implicit declaration of ‘lock’ was here
+  lock(&mutex);
+  ^~~~
+../RingBuffer.c:305:6: warning: conflicting types for ‘unlock’
+ void unlock(pthread_mutex_t *mutex)
+      ^~~~~~
+../RingBuffer.c:79:2: note: previous implicit declaration of ‘unlock’ was here
+  unlock(&mutex);
+  ^~~~~~
+../RingBuffer.c:328:6: warning: conflicting types for ‘cond_signal’
+ void cond_signal(pthread_cond_t *cond)
+      ^~~~~~~~~~~
+../RingBuffer.c:201:3: note: previous implicit declaration of ‘cond_signal’ was here
+   cond_signal(&ring_buf_empty);
+   ^~~~~~~~~~~
+../RingBuffer.c:333:6: warning: conflicting types for ‘cond_wait’
+ void cond_wait(pthread_cond_t *cond, pthread_mutex_t *mutex)
+      ^~~~~~~~~
+../RingBuffer.c:108:3: note: previous implicit declaration of ‘cond_wait’ was here
+   cond_wait(&ring_buf_full, &mutex);
+   ^~~~~~~~~
+../RingBuffer.c:215:32: warning: ‘underflow_count’ defined but not used [-Wunused-variable]
+  static int copy_len_send = 0, underflow_count = 0;
+                                ^~~~~~~~~~~~~~~
+../RingBuffer.c:95:33: warning: ‘overflow_count’ defined but not used [-Wunused-variable]
+  static int write_len_send = 0, overflow_count = 0;
+                                 ^~~~~~~~~~~~~~
+已结束构建： ../RingBuffer.c
+ 
+正在构建文件： ../RtpSend.c
+正在调用： GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/home/peter/transplant_srt/temp/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RtpSend.d" -MT"RtpSend.o" -o "RtpSend.o" "../RtpSend.c"
+../RtpSend.c: In function ‘Rtp_Send’:
+../RtpSend.c:60:41: warning: pointer targets in passing argument 1 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                         ^~~~~~~~~~~
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+../RtpSend.c:60:54: warning: pointer targets in passing argument 2 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                                      ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned int *’ but argument is of type ‘int *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+已结束构建： ../RtpSend.c
+ 
+正在构建文件： ../SrtRecv.c
+正在调用： GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/home/peter/transplant_srt/temp/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:209:1: warning: multi-line comment [-Wcomment]
+ //        printf("udp info:%u %u %u %u\n", ntohs(udp_header->source),\
+ ^
+../SrtRecv.c:211:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^~~~~~~~~~~~~~~~~~~~~~~~~
+../SrtRecv.c:190:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^~~~~~~
+已结束构建： ../SrtRecv.c
+ 
+正在构建目标： srt_recv
+正在调用： GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+已结束构建目标： srt_recv
+ 
+10:18:06 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+10:18:16 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+10:18:18 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+10:19:26 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+正在构建文件： ../Main.c
+正在调用： GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/home/peter/transplant_srt/temp/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Main.d" -MT"Main.o" -o "Main.o" "../Main.c"
+已结束构建： ../Main.c
+ 
+正在构建文件： ../RtpSend.c
+正在调用： GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/home/peter/transplant_srt/temp/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RtpSend.d" -MT"RtpSend.o" -o "RtpSend.o" "../RtpSend.c"
+../RtpSend.c: In function ‘Rtp_Send’:
+../RtpSend.c:60:41: warning: pointer targets in passing argument 1 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                         ^~~~~~~~~~~
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+../RtpSend.c:60:54: warning: pointer targets in passing argument 2 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                                      ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned int *’ but argument is of type ‘int *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+已结束构建： ../RtpSend.c
+ 
+正在构建文件： ../SrtRecv.c
+正在调用： GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/home/peter/transplant_srt/temp/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:209:1: warning: multi-line comment [-Wcomment]
+ //        printf("udp info:%u %u %u %u\n", ntohs(udp_header->source),\
+ ^
+../SrtRecv.c:211:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^~~~~~~~~~~~~~~~~~~~~~~~~
+../SrtRecv.c:190:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^~~~~~~
+已结束构建： ../SrtRecv.c
+ 
+正在构建目标： srt_recv
+正在调用： GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale -lsrt
+已结束构建目标： srt_recv
+ 
+10:19:30 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+10:19:48 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+10:22:58 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+正在构建目标： srt_recv
+正在调用： GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale
+./SrtRecv.o：在函数‘Srt_Init’中：
+/home/peter/eclipse-workspace/srt_recv/srt_recv/Debug/../SrtRecv.c:116：对‘srt_startup’未定义的引用
+/home/peter/eclipse-workspace/srt_recv/srt_recv/Debug/../SrtRecv.c:118：对‘srt_create_socket’未定义的引用
+/home/peter/eclipse-workspace/srt_recv/srt_recv/Debug/../SrtRecv.c:121：对‘srt_getlasterror_str’未定义的引用
+/home/peter/eclipse-workspace/srt_recv/srt_recv/Debug/../SrtRecv.c:132：对‘srt_setsockflag’未定义的引用
+/home/peter/eclipse-workspace/srt_recv/srt_recv/Debug/../SrtRecv.c:133：对‘srt_setsockflag’未定义的引用
+/home/peter/eclipse-workspace/srt_recv/srt_recv/Debug/../SrtRecv.c:138：对‘srt_bind’未定义的引用
+/home/peter/eclipse-workspace/srt_recv/srt_recv/Debug/../SrtRecv.c:141：对‘srt_getlasterror_str’未定义的引用
+/home/peter/eclipse-workspace/srt_recv/srt_recv/Debug/../SrtRecv.c:146：对‘srt_listen’未定义的引用
+/home/peter/eclipse-workspace/srt_recv/srt_recv/Debug/../SrtRecv.c:149：对‘srt_getlasterror_str’未定义的引用
+makefile:44: recipe for target 'srt_recv' failed
+/home/peter/eclipse-workspace/srt_recv/srt_recv/Debug/../SrtRecv.c:154：对‘srt_accept’未定义的引用
+./SrtRecv.o：在函数‘Srt_Release’中：
+/home/peter/eclipse-workspace/srt_recv/srt_recv/Debug/../SrtRecv.c:163：对‘srt_close’未定义的引用
+/home/peter/eclipse-workspace/srt_recv/srt_recv/Debug/../SrtRecv.c:166：对‘srt_getlasterror_str’未定义的引用
+/home/peter/eclipse-workspace/srt_recv/srt_recv/Debug/../SrtRecv.c:171：对‘srt_cleanup’未定义的引用
+./SrtRecv.o：在函数‘Srt_Recv’中：
+/home/peter/eclipse-workspace/srt_recv/srt_recv/Debug/../SrtRecv.c:192：对‘srt_recv’未定义的引用
+/home/peter/eclipse-workspace/srt_recv/srt_recv/Debug/../SrtRecv.c:195：对‘srt_getlasterror_str’未定义的引用
+collect2: error: ld returned 1 exit status
+make: *** [srt_recv] Error 1
+"make all" terminated with exit code 2. Build might be incomplete.
+10:26:05 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+正在构建目标： srt_recv
+正在调用： GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lsrt -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale
+已结束构建目标： srt_recv
+ 
+10:35:51 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+10:36:58 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+正在构建文件： ../Main.c
+正在调用： GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/home/peter/transplant_srt/temp/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Main.d" -MT"Main.o" -o "Main.o" "../Main.c"
+已结束构建： ../Main.c
+ 
+正在构建文件： ../RtpSend.c
+正在调用： GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/home/peter/transplant_srt/temp/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RtpSend.d" -MT"RtpSend.o" -o "RtpSend.o" "../RtpSend.c"
+../RtpSend.c: In function ‘Rtp_Send’:
+../RtpSend.c:60:41: warning: pointer targets in passing argument 1 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                         ^~~~~~~~~~~
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+../RtpSend.c:60:54: warning: pointer targets in passing argument 2 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                                      ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned int *’ but argument is of type ‘int *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+已结束构建： ../RtpSend.c
+ 
+正在构建文件： ../SrtRecv.c
+正在调用： GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/home/peter/transplant_srt/temp/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:209:1: warning: multi-line comment [-Wcomment]
+ //        printf("udp info:%u %u %u %u\n", ntohs(udp_header->source),\
+ ^
+../SrtRecv.c:211:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^~~~~~~~~~~~~~~~~~~~~~~~~
+../SrtRecv.c:190:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^~~~~~~
+已结束构建： ../SrtRecv.c
+ 
+正在构建目标： srt_recv
+正在调用： GCC C++ Linker
+g++ -L/usr/local/ffmpeg/lib -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lsrt -lavcodec -lavutil -lopencv_imgproc -lopencv_core -lopencv_highgui -lswscale
+已结束构建目标： srt_recv
+ 
+10:44:44 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+10:46:14 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+10:47:56 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+10:55:43 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+10:55:47 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+10:59:21 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+11:00:47 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+11:01:11 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+11:12:05 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+11:15:08 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+11:20:17 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+11:23:43 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+11:25:13 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+11:26:47 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+11:27:33 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+11:28:34 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+21:06:25 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+正在构建目标： srt_recv
+正在调用： GCC C++ Linker
+g++  -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lsrt
+已结束构建目标： srt_recv
+ 
+21:06:31 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+21:45:24 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+21:49:20 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+22:06:08 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+22:07:37 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+22:10:00 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+22:17:07 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+22:30:39 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+22:32:36 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+22:34:40 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+22:34:45 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+22:35:07 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+22:38:44 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+22:40:48 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+22:48:45 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+16:51:43 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+正在构建文件： ../Main.c
+正在调用： GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/home/peter/transplant_srt/temp/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Main.d" -MT"Main.o" -o "Main.o" "../Main.c"
+已结束构建： ../Main.c
+ 
+正在构建文件： ../RtpSend.c
+正在调用： GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/home/peter/transplant_srt/temp/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RtpSend.d" -MT"RtpSend.o" -o "RtpSend.o" "../RtpSend.c"
+../RtpSend.c: In function ‘Rtp_Send’:
+../RtpSend.c:60:41: warning: pointer targets in passing argument 1 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                         ^~~~~~~~~~~
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+../RtpSend.c:60:54: warning: pointer targets in passing argument 2 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                                      ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned int *’ but argument is of type ‘int *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+已结束构建： ../RtpSend.c
+ 
+正在构建文件： ../SrtRecv.c
+正在调用： GCC C Compiler
+gcc -I/usr/local/ffmpeg/include -I/home/peter/transplant_srt/temp/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:209:1: warning: multi-line comment [-Wcomment]
+ //        printf("udp info:%u %u %u %u\n", ntohs(udp_header->source),\
+ ^
+../SrtRecv.c:211:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^~~~~~~~~~~~~~~~~~~~~~~~~
+../SrtRecv.c:190:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^~~~~~~
+已结束构建： ../SrtRecv.c
+ 
+正在构建目标： srt_recv
+正在调用： GCC C++ Linker
+g++  -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lsrt
+已结束构建目标： srt_recv
+ 
+16:52:56 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+正在构建文件： ../Main.c
+正在调用： GCC C Compiler
+gcc -I/home/peter/transplant_srt/temp/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"Main.d" -MT"Main.o" -o "Main.o" "../Main.c"
+已结束构建： ../Main.c
+ 
+正在构建文件： ../RingBuffer.c
+正在调用： GCC C Compiler
+gcc -I/home/peter/transplant_srt/temp/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RingBuffer.d" -MT"RingBuffer.o" -o "RingBuffer.o" "../RingBuffer.c"
+../RingBuffer.c: In function ‘ring_buffer_init’:
+../RingBuffer.c:55:6: warning: implicit declaration of function ‘cond_ini’ [-Wimplicit-function-declaration]
+  if (cond_ini(&ring_buf_full, NULL) < 0) {
+      ^~~~~~~~
+../RingBuffer.c:65:6: warning: implicit declaration of function ‘mutex_ini’ [-Wimplicit-function-declaration]
+  if (mutex_ini(&mutex, NULL) < 0) {
+      ^~~~~~~~~
+../RingBuffer.c: In function ‘ring_buf_left_fm’:
+../RingBuffer.c:77:2: warning: implicit declaration of function ‘lock’; did you mean ‘clock’? [-Wimplicit-function-declaration]
+  lock(&mutex);
+  ^~~~
+  clock
+../RingBuffer.c:79:2: warning: implicit declaration of function ‘unlock’; did you mean ‘clock’? [-Wimplicit-function-declaration]
+  unlock(&mutex);
+  ^~~~~~
+  clock
+../RingBuffer.c: In function ‘write_nalu_to_ring_buffer’:
+../RingBuffer.c:108:3: warning: implicit declaration of function ‘cond_wait’; did you mean ‘on_exit’? [-Wimplicit-function-declaration]
+   cond_wait(&ring_buf_full, &mutex);
+   ^~~~~~~~~
+   on_exit
+../RingBuffer.c:118:1: warning: multi-line comment [-Wcomment]
+ // printf("write fm:%d left_length:%d header len:%d fm len:%d\n", frame_num, left_length, \
+ ^
+../RingBuffer.c:201:3: warning: implicit declaration of function ‘cond_signal’; did you mean ‘strsignal’? [-Wimplicit-function-declaration]
+   cond_signal(&ring_buf_empty);
+   ^~~~~~~~~~~
+   strsignal
+../RingBuffer.c:95:33: warning: unused variable ‘overflow_count’ [-Wunused-variable]
+  static int write_len_send = 0, overflow_count = 0;
+                                 ^~~~~~~~~~~~~~
+../RingBuffer.c: In function ‘read_nalu_from_ring_buffer’:
+../RingBuffer.c:240:1: warning: multi-line comment [-Wcomment]
+ // printf("read fm:%d cp len:%d left len:%d fm len:%d\n", \
+ ^
+../RingBuffer.c:215:32: warning: unused variable ‘underflow_count’ [-Wunused-variable]
+  static int copy_len_send = 0, underflow_count = 0;
+                                ^~~~~~~~~~~~~~~
+../RingBuffer.c: At top level:
+../RingBuffer.c:300:6: warning: conflicting types for ‘lock’
+ void lock(pthread_mutex_t *mutex)
+      ^~~~
+../RingBuffer.c:77:2: note: previous implicit declaration of ‘lock’ was here
+  lock(&mutex);
+  ^~~~
+../RingBuffer.c:305:6: warning: conflicting types for ‘unlock’
+ void unlock(pthread_mutex_t *mutex)
+      ^~~~~~
+../RingBuffer.c:79:2: note: previous implicit declaration of ‘unlock’ was here
+  unlock(&mutex);
+  ^~~~~~
+../RingBuffer.c:328:6: warning: conflicting types for ‘cond_signal’
+ void cond_signal(pthread_cond_t *cond)
+      ^~~~~~~~~~~
+../RingBuffer.c:201:3: note: previous implicit declaration of ‘cond_signal’ was here
+   cond_signal(&ring_buf_empty);
+   ^~~~~~~~~~~
+../RingBuffer.c:333:6: warning: conflicting types for ‘cond_wait’
+ void cond_wait(pthread_cond_t *cond, pthread_mutex_t *mutex)
+      ^~~~~~~~~
+../RingBuffer.c:108:3: note: previous implicit declaration of ‘cond_wait’ was here
+   cond_wait(&ring_buf_full, &mutex);
+   ^~~~~~~~~
+../RingBuffer.c:215:32: warning: ‘underflow_count’ defined but not used [-Wunused-variable]
+  static int copy_len_send = 0, underflow_count = 0;
+                                ^~~~~~~~~~~~~~~
+../RingBuffer.c:95:33: warning: ‘overflow_count’ defined but not used [-Wunused-variable]
+  static int write_len_send = 0, overflow_count = 0;
+                                 ^~~~~~~~~~~~~~
+已结束构建： ../RingBuffer.c
+ 
+正在构建文件： ../RtpSend.c
+正在调用： GCC C Compiler
+gcc -I/home/peter/transplant_srt/temp/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"RtpSend.d" -MT"RtpSend.o" -o "RtpSend.o" "../RtpSend.c"
+../RtpSend.c: In function ‘Rtp_Send’:
+../RtpSend.c:60:41: warning: pointer targets in passing argument 1 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                         ^~~~~~~~~~~
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned char *’ but argument is of type ‘char *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+../RtpSend.c:60:54: warning: pointer targets in passing argument 2 of ‘read_nalu_from_ring_buffer’ differ in signedness [-Wpointer-sign]
+   read_len = read_nalu_from_ring_buffer(Packet_Buff, &read_ind);
+                                                      ^
+In file included from ../RtpSend.h:19:0,
+                 from ../RtpSend.c:8:
+../RingBuffer.h:18:5: note: expected ‘unsigned int *’ but argument is of type ‘int *’
+ int read_nalu_from_ring_buffer(unsigned char *, unsigned int *);
+     ^~~~~~~~~~~~~~~~~~~~~~~~~~
+已结束构建： ../RtpSend.c
+ 
+正在构建文件： ../SrtRecv.c
+正在调用： GCC C Compiler
+gcc -I/home/peter/transplant_srt/temp/include -I/usr/include -I/usr/local/include -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"SrtRecv.d" -MT"SrtRecv.o" -o "SrtRecv.o" "../SrtRecv.c"
+../SrtRecv.c: In function ‘Srt_Recv’:
+../SrtRecv.c:209:1: warning: multi-line comment [-Wcomment]
+ //        printf("udp info:%u %u %u %u\n", ntohs(udp_header->source),\
+ ^
+../SrtRecv.c:211:9: warning: implicit declaration of function ‘write_nalu_to_ring_buffer’ [-Wimplicit-function-declaration]
+         write_nalu_to_ring_buffer((unsigned char*)msg, len, ind);
+         ^~~~~~~~~~~~~~~~~~~~~~~~~
+../SrtRecv.c:190:20: warning: unused variable ‘buf_out’ [-Wunused-variable]
+      unsigned char buf_out[MAXBUF + 1] = {0};
+                    ^~~~~~~
+已结束构建： ../SrtRecv.c
+ 
+正在构建目标： srt_recv
+正在调用： GCC C++ Linker
+g++  -o "srt_recv"  ./Main.o ./RingBuffer.o ./RtpSend.o ./SrtRecv.o   -lpthread -lsrt
+已结束构建目标： srt_recv
+ 
+16:53:02 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+16:53:05 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
+16:53:10 **** Incremental Build of configuration Debug for project srt_recv ****
+make all 
+make: 对“all”无需做任何事。
