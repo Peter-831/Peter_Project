@@ -1,0 +1,25 @@
+CROSS_COMPILE:= /home/hxj/openwrt_18.06/staging_dir/toolchain-mipsel_24kc_gcc-7.3.0_musl/bin/mipsel-openwrt-linux-musl-
+ARCH:= mips
+CC:= $(CROSS_COMPILE)gcc
+LD:= $(CROSS_COMPILE)ld
+obj-m += udpFilter.o
+KERNELDIR:= /home/hxj/openwrt_18.06/build_dir/target-mipsel_24kc_musl/linux-ramips_mt7621/linux-4.14.195
+PWD:= $(shell pwd) 
+
+default:
+	$(MAKE)  -C $(KERNELDIR) M=$(PWD) modules CROSS_COMPILE=$(CROSS_COMPILE) ARCH=$(ARCH)
+
+#modules: 
+#	$(MAKE) -C $(KERNELDIR) M=$(PWD)  modules ARCH=mips
+
+#modules_install: 
+#	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules_install ARCH=mips
+
+clean:
+#	rm -f *.o
+#	rm -f *.symvers
+#	rm -f *.order
+#	rm -f *.ko
+#	rm -f *.mod.c
+#	rm -f *.mod
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
